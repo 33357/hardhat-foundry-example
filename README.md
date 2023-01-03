@@ -4,37 +4,32 @@
 
 ![Github Actions](https://github.com/devanonon/hardhat-foundry-template/workflows/test/badge.svg)
 
-### Getting Started
+### Install
 
- * Use Foundry: 
 ```bash
-forge install
+yarn i
+```
+
+### Build
+
+```bash
+yarn build
+```
+
+### Test
 forge test
+```bash
+yarn test
 ```
 
- * Use Hardhat:
+hardhat test
 ```bash
-npm install
-npx hardhat test
+yarn test:h
 ```
 
-### Features
-
- * Write / run tests with either Hardhat or Foundry:
+hardhat coverage test
 ```bash
-forge test
-# or
-npx hardhat test
-```
-
- * Use Hardhat's task framework
-```bash
-npx hardhat example
-```
-
- * Install libraries with Foundry which work with Hardhat.
-```bash
-forge install rari-capital/solmate # Already in this repo, just an example
+yarn test:c
 ```
 
 ### Notes

@@ -18,7 +18,7 @@ task("example", "Example task").setAction(example);
 
 const config: HardhatUserConfig = {
   solidity: {
-    version: "0.8.13",
+    version: "0.8.17",
     settings: {
       optimizer: {
         enabled: true,
@@ -29,6 +29,10 @@ const config: HardhatUserConfig = {
   paths: {
     sources: "./src", // Use ./src rather than ./contracts as Hardhat expects
     cache: "./cache_hardhat", // Use a different cache for Hardhat than Foundry
+  },
+  typechain: {
+    outDir: './sdk/src/typechain',
+    target: 'ethers-v5',
   },
   // This fully resolves paths for imports in the ./lib directory for Hardhat
   preprocess: {

@@ -1,5 +1,5 @@
 {
-  "name": "hardhat-foundry-template",
+  "name": "hardhat-foundry-example",
   "version": "1.0.0",
   "description": "The harmony between Foundry and Hardhat.",
   "directories": {
@@ -7,9 +7,14 @@
     "test": "test"
   },
   "scripts": {
-    "test": "hardhat test"
+    "i": "yarn && forge install",
+    "build": "hardhat typechain && forge build",
+    "test": "forge test -vvvv",
+    "testh": "hardhat test",
+    "testc": "hardhat coverage",
+    "format": "yarn prettier --write \"**/*.{ts,js,sol}\" && cd sdk && yarn format:fix"
   },
-  "author": "Devan Non <devanon@chainstride.capital>",
+  "author": "33357 <43600005+33357@users.noreply.github.com>",
   "license": "Apache-2.0",
   "devDependencies": {
     "@nomiclabs/hardhat-ethers": "^2.0.6",
@@ -25,7 +30,7 @@
     "hardhat": "^2.9.5",
     "hardhat-preprocessor": "^0.1.4",
     "ts-node": "^10.7.0",
-    "typechain": "^8.0.0",
+    "typechain": "^8.1.1",
     "typescript": "^4.6.4"
   }
 }
