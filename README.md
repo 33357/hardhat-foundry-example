@@ -22,14 +22,20 @@ forge test
 yarn test
 ```
 
+forge fork test
+```bash
+source envs/eth.env
+yarn test --fork-url $PROVIDER
+```
+
 hardhat test
 ```bash
-yarn test:h
+yarn testh
 ```
 
 hardhat coverage test
 ```bash
-yarn test:c
+yarn testc
 ```
 
 ### Notes
