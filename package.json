@@ -12,7 +12,7 @@
     "test": "forge test -vvvv",
     "testh": "hardhat test",
     "testc": "hardhat coverage",
-    "format": "yarn prettier --write \"**/*.{ts,js,sol}\" && cd sdk && yarn format:fix"
+    "format": "yarn prettier --write \"**/*.{ts,js,sol}\" && cd sdk && yarn format"
   },
   "author": "33357 <43600005+33357@users.noreply.github.com>",
   "license": "Apache-2.0",

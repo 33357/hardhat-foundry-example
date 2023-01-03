@@ -1,6 +1,6 @@
 {
-  "name": "web3door-sdk",
-  "version": "0.2.0",
+  "name": "hardhat-foundry-sdk",
+  "version": "0.0.1",
   "main": "dist/index.js",
   "author": "33357 <43600005+33357@users.noreply.github.com>",
   "license": "MIT",
@@ -8,7 +8,7 @@
     "prebuild": "cd .. && cp ./deployment/deployment.json ./sdk/src/config/ && cd sdk",
     "build:clean": "rm -rf dist && rm -f tsconfig.tsbuildinfo",
     "build": "yarn build:clean && yarn prebuild && yarn tsc && yarn cpy ./src/typechain/ ./dist/typechain/",
-    "format:fix": "yarn prettier --write \"**/*.{ts,js}\""
+    "format": "yarn prettier --write \"**/*.{ts,js}\""
   },
   "devDependencies": {
     "@types/mocha": "^8.2.2",
