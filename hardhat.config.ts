@@ -41,7 +41,7 @@ const config: HardhatUserConfig = {
       transform: (line: string) => {
         if (line.match(/^\s*import /i)) {
           getRemappings().forEach(([find, replace]) => {
-            if (line.match(find)) {
+            if (line.match(find) && find != "@openzeppelin/") {
               line = line.replace(find, replace);
             }
           });
