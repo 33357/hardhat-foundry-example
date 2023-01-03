@@ -1,13 +1,7 @@
 import { Provider } from '@ethersproject/providers';
 import { CallOverrides, PayableOverrides, Signer } from 'ethers';
-import {
-  ExampleUpgradeable,
-  ExampleUpgradeable__factory,
-} from '../typechain';
-import {
-  ExampleUpgradeableClient,
-  DeploymentInfo
-} from '..';
+import { ExampleUpgradeable, ExampleUpgradeable__factory } from '../typechain';
+import { ExampleUpgradeableClient, DeploymentInfo } from '..';
 
 export class EtherExampleUpgradeableClient implements ExampleUpgradeableClient {
   protected _provider: Provider | Signer | undefined;

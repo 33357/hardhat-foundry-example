@@ -1,10 +1,7 @@
 import { Provider } from '@ethersproject/providers';
 import { BigNumber, CallOverrides, PayableOverrides, Signer } from 'ethers';
 import { ExampleClient, DeploymentInfo } from '..';
-import {
-  Example,
-  Example__factory,
-} from '../typechain';
+import { Example, Example__factory } from '../typechain';
 
 export class EtherExampleClient implements ExampleClient {
   protected _provider: Provider | Signer | undefined;

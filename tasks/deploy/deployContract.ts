@@ -1,33 +1,33 @@
-import "@nomiclabs/hardhat-ethers";
-import { task } from "hardhat/config";
-import { HardhatRuntimeEnvironment } from "hardhat/types";
-import { PayableOverrides } from "ethers";
-import { getDeployment, setDeployment, log } from "../utils";
+import '@nomiclabs/hardhat-ethers';
+import {task} from 'hardhat/config';
+import {HardhatRuntimeEnvironment} from 'hardhat/types';
+import {PayableOverrides} from 'ethers';
+import {getDeployment, setDeployment, log} from '../utils';
 
 task(`contract:deploy`, `Deploy contract`)
-  .addOptionalParam("contract", "The contract name")
-  .addOptionalParam("args", "The contract args")
-  .addOptionalParam("waitNum", "The waitNum to transaction")
-  .addOptionalParam("gasPrice", "The gasPrice to transaction")
+  .addOptionalParam('contract', 'The contract name')
+  .addOptionalParam('args', 'The contract args')
+  .addOptionalParam('waitNum', 'The waitNum to transaction')
+  .addOptionalParam('gasPrice', 'The gasPrice to transaction')
   .setAction(async (args, hre: HardhatRuntimeEnvironment) => {
     const chainId = Number(await (<any>hre).getChainId());
     const txConfig: PayableOverrides = {};
     if (chainId == 1) {
-      txConfig.maxFeePerGas = args["gasPrice"]
-        ? hre.ethers.utils.parseUnits(args["gasPrice"], "gwei")
+      txConfig.maxFeePerGas = args['gasPrice']
+        ? hre.ethers.utils.parseUnits(args['gasPrice'], 'gwei')
         : undefined;
       txConfig.maxPriorityFeePerGas = hre.ethers.utils.parseUnits(
-        "0.5",
-        "gwei"
+        '0.5',
+        'gwei'
       );
     } else {
-      txConfig.gasPrice = args["gasPrice"]
-        ? hre.ethers.utils.parseUnits(args["gasPrice"], "gwei")
+      txConfig.gasPrice = args['gasPrice']
+        ? hre.ethers.utils.parseUnits(args['gasPrice'], 'gwei')
         : undefined;
     }
-    const contractArgs = JSON.parse(args["args"]);
-    const waitNum = args["waitNum"] ? parseInt(args["waitNum"]) : 1;
-    const contract = args["contract"];
+    const contractArgs = JSON.parse(args['args']);
+    const waitNum = args['waitNum'] ? parseInt(args['waitNum']) : 1;
+    const contract = args['contract'];
     const operator = (await hre.ethers.getSigners())[0];
 
     log(`deploy ${contract}`);
@@ -37,7 +37,7 @@ task(`contract:deploy`, `Deploy contract`)
     const contractProxyAddress = deployResult.contractAddress;
     const contractImplAddress = contractProxyAddress;
     const contractFromBlock = deployResult.blockNumber;
-    const contractVersion = "1.0.0";
+    const contractVersion = '1.0.0';
     log(
       `${contract} deployed proxy at ${contractProxyAddress},impl at ${contractImplAddress},version ${contractVersion},fromBlock ${contractFromBlock}`
     );
