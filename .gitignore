@@ -8,6 +8,15 @@ node_modules/
 #Hardhat files
 cache_hardhat/
 artifacts/
+coverage/
+
+#SDK files
+sdk/tsconfig.tsbuildinfo
+sdk/dist/
+sdk/src/typechain/
+
+#ENV files
+envs/
 
 #Hardhat plugin files
 typechain-types/

@@ -2,9 +2,12 @@ import fs from "fs";
 import "@nomiclabs/hardhat-waffle";
 import "@typechain/hardhat";
 import "hardhat-preprocessor";
-import { HardhatUserConfig, task } from "hardhat/config";
+import '@nomiclabs/hardhat-etherscan';
+import { HardhatUserConfig } from "hardhat/config";
 
-import example from "./tasks/example";
+if (fs.existsSync('./sdk/src/typechain')) {
+  import('./tasks');
+}
 
 function getRemappings() {
   return fs
@@ -13,8 +16,6 @@ function getRemappings() {
     .filter(Boolean)
     .map((line) => line.trim().split("="));
 }
-
-task("example", "Example task").setAction(example);
 
 const config: HardhatUserConfig = {
   solidity: {
@@ -48,6 +49,9 @@ const config: HardhatUserConfig = {
         return line;
       },
     }),
+  },
+  etherscan: {
+    apiKey: process.env.SCAN_API_KEY,
   },
 };
 
