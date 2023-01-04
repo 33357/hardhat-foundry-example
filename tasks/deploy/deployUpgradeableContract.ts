@@ -32,18 +32,19 @@ task(`upgradeableContract:deploy`, `Deploy upgradeableContract`)
     log(`deploy ${contract}`);
 
     const Contract = await hre.ethers.getContractFactory(contract);
-    const deployResult = await (<any>hre).upgrades.deployProxy(
+    const transaction = await (<any>hre).upgrades.deployProxy(
       Contract,
       contractArgs,
       {kind: 'uups'},
       txConfig
     );
-    const contractProxyAddress = deployResult.contractAddress;
+    const result = await transaction.wait();
+    const contractProxyAddress = result.contractAddress;
     const contractImplAddress = await getImplementationAddress(
       hre.ethers.provider,
       contractProxyAddress
     );
-    const contractFromBlock = deployResult.blockNumber;
+    const contractFromBlock = result.blockNumber;
     const _contract = Contract.attach(contractProxyAddress);
     const contractVersion = await _contract.implementationVersion();
 

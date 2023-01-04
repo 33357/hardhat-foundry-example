@@ -8,8 +8,7 @@ export interface ContractInfo {
 }
 
 export interface Deployment {
-  Example: ContractInfo;
-  ExampleUpgradeable: ContractInfo;
+  [contractName: string]: ContractInfo;
 }
 
 export interface DeploymentFull {

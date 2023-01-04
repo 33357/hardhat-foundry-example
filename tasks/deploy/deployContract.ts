@@ -32,13 +32,18 @@ task(`contract:deploy`, `Deploy contract`)
     const contract = args['contract'];
     const operator = (await hre.ethers.getSigners())[0];
 
-    log(`deploy ${contract}, args:${JSON.stringify(contractArgs)},config: ${JSON.stringify(txConfig)}`);
+    log(
+      `deploy ${contract}, operator:${operator.address}, args:${JSON.stringify(
+        contractArgs
+      )}, config: ${JSON.stringify(txConfig)}`
+    );
 
     const Contract = await hre.ethers.getContractFactory(contract);
-    const deployResult = await Contract.deploy(...contractArgs, txConfig);
-    const contractProxyAddress = deployResult.contractAddress;
+    const transaction = await Contract.deploy(...contractArgs, txConfig);
+    const result = await transaction.wait();
+    const contractProxyAddress = result.contractAddress;
     const contractImplAddress = contractProxyAddress;
-    const contractFromBlock = deployResult.blockNumber;
+    const contractFromBlock = result.blockNumber;
     const contractVersion = '1.0.0';
     log(
       `${contract} deployed proxy at ${contractProxyAddress},impl at ${contractImplAddress},version ${contractVersion},fromBlock ${contractFromBlock}`

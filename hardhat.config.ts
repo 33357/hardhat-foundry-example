@@ -4,6 +4,8 @@ import '@typechain/hardhat';
 import 'hardhat-preprocessor';
 import '@nomiclabs/hardhat-etherscan';
 import {HardhatUserConfig} from 'hardhat/config';
+import dotenv from 'dotenv';
+dotenv.config();
 
 if (fs.existsSync('./sdk/src/typechain')) {
   import('./tasks');
@@ -17,6 +19,17 @@ function getRemappings() {
     .map((line) => line.trim().split('='));
 }
 
+const mnemonic = 'test test test test test test test test test test test junk';
+const privateKey = process.env.PRIVATE_KEY;
+let accounts;
+if (privateKey) {
+  accounts = [privateKey];
+} else {
+  accounts = {
+    mnemonic,
+  };
+}
+
 const config: HardhatUserConfig = {
   solidity: {
     version: '0.8.17',
@@ -25,6 +38,13 @@ const config: HardhatUserConfig = {
         enabled: true,
         runs: 200,
       },
+    },
+  },
+  networks: {
+    1: {
+      url: process.env.PROVIDER ? process.env.PROVIDER : '',
+      accounts,
+      timeout: 60000,
     },
   },
   paths: {
@@ -37,7 +57,7 @@ const config: HardhatUserConfig = {
   },
   // This fully resolves paths for imports in the ./lib directory for Hardhat
   preprocess: {
-    eachLine: (hre) => ({
+    eachLine: () => ({
       transform: (line: string) => {
         if (line.match(/^\s*import /i)) {
           getRemappings().forEach(([find, replace]) => {
