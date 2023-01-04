@@ -11,12 +11,16 @@ task(`contract:verify`, `verify contract`)
     const contract = args['contract'];
     const contractArgs = JSON.parse(args['args']);
     const deployment = await getDeployment(
-      Number(await (<any>hre).getChainId())
+      (
+        await hre.ethers.provider.getNetwork()
+      ).chainId
     );
     const address = args['address']
       ? args['address']
       : deployment[contract].implAddress;
+
     log(`verify ${contract}, address: ${address}`);
+
     await hre.run('verify:verify', {
       address: address,
       constructorArguments: contractArgs,
