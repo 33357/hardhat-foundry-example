@@ -10,7 +10,7 @@
     "build": "yarn build:clean && yarn prebuild && yarn tsc && yarn cpy ./src/typechain/ ./dist/typechain/",
     "format": "yarn prettier --write \"**/*.{ts,js}\""
   },
-  "devDependencies": {
+  "dependencies": {
     "@types/mocha": "^8.2.2",
     "cpy": "^8.1.2",
     "cpy-cli": "^3.1.1",

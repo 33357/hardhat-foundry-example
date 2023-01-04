@@ -16,7 +16,7 @@
   },
   "author": "33357 <43600005+33357@users.noreply.github.com>",
   "license": "Apache-2.0",
-  "devDependencies": {
+  "dependencies": {
     "@nomiclabs/hardhat-ethers": "npm:hardhat-deploy-ethers@0.3.0-beta.10",
     "@nomiclabs/hardhat-etherscan": "^3.1.4",
     "@nomiclabs/hardhat-waffle": "^2.0.3",
