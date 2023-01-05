@@ -2,7 +2,7 @@ export interface ContractInfo {
   proxyAddress: string;
   implAddress: string;
   version: string;
-  contract: string;
+  name: string;
   operator: string;
   fromBlock: number;
 }
