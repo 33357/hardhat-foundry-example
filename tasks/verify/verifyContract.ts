@@ -4,11 +4,11 @@ import {HardhatRuntimeEnvironment} from 'hardhat/types';
 import {log, getDeployment} from '../utils';
 
 task(`contract:verify`, `verify contract`)
-  .addOptionalParam('contract', 'The contract name')
+  .addOptionalParam('name', 'The contract name')
   .addOptionalParam('args', 'The contract args')
   .addOptionalParam('address', 'The contract address')
   .setAction(async (args, hre: HardhatRuntimeEnvironment) => {
-    const contract = args['contract'];
+    const contractName = args['name'];
     const contractArgs = JSON.parse(args['args']);
     const deployment = await getDeployment(
       (
@@ -17,9 +17,9 @@ task(`contract:verify`, `verify contract`)
     );
     const address = args['address']
       ? args['address']
-      : deployment[contract].implAddress;
+      : deployment[contractName].implAddress;
 
-    log(`verify ${contract}, address: ${address}`);
+    log(`verify ${contractName}, address: ${address}`);
 
     await hre.run('verify:verify', {
       address: address,

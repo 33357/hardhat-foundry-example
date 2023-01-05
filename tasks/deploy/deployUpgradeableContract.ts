@@ -6,7 +6,7 @@ import {PayableOverrides} from 'ethers';
 import {getDeployment, setDeployment, log} from '../utils';
 
 task(`upgradeableContract:deploy`, `Deploy upgradeableContract`)
-  .addOptionalParam('contract', 'The contract name')
+  .addOptionalParam('name', 'The contract name')
   .addOptionalParam('args', 'The contract args')
   .addOptionalParam('gasPrice', 'The gasPrice to transaction')
   .setAction(async (args, hre: HardhatRuntimeEnvironment) => {
@@ -26,12 +26,12 @@ task(`upgradeableContract:deploy`, `Deploy upgradeableContract`)
       );
     }
     const contractArgs = JSON.parse(args['args']);
-    const contract = args['contract'];
+    const contractName = args['contract'];
     const operator = (await hre.ethers.getSigners())[0];
 
-    log(`deploy ${contract}`);
+    log(`deploy ${contractName}`);
 
-    const Contract = await hre.ethers.getContractFactory(contract);
+    const Contract = await hre.ethers.getContractFactory(contractName);
     const transaction = await (<any>hre).upgrades.deployProxy(
       Contract,
       contractArgs,
@@ -49,17 +49,18 @@ task(`upgradeableContract:deploy`, `Deploy upgradeableContract`)
     const contractVersion = await _contract.implementationVersion();
 
     log(
-      `${contract} deployed proxy at ${contractProxyAddress},impl at ${contractImplAddress},version ${contractVersion},fromBlock ${contractFromBlock}`
+      `${contractName} deployed proxy at ${contractProxyAddress},impl at ${contractImplAddress},version ${contractVersion},fromBlock ${contractFromBlock}`
     );
 
     const deployment = await getDeployment(chainId);
-    deployment[contract] = {
+    deployment[contractName] = {
       proxyAddress: contractProxyAddress,
       implAddress: contractImplAddress,
       version: contractVersion,
-      contract: contract,
+      name: contractName,
       operator: operator.address,
       fromBlock: contractFromBlock,
     };
     await setDeployment(chainId, deployment);
   });
+

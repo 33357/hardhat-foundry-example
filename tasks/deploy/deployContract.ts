@@ -5,7 +5,7 @@ import {PayableOverrides} from 'ethers';
 import {getDeployment, setDeployment, log} from '../utils';
 
 task(`contract:deploy`, `Deploy contract`)
-  .addOptionalParam('contract', 'The contract name')
+  .addOptionalParam('name', 'The contract name')
   .addOptionalParam('args', 'The contract args')
   .addOptionalParam('gasPrice', 'The gasPrice to transaction')
   .addOptionalParam(
@@ -29,32 +29,34 @@ task(`contract:deploy`, `Deploy contract`)
       );
     }
     const contractArgs = JSON.parse(args['args']);
-    const contract = args['contract'];
+    const contractName = args['name'];
     const operator = (await hre.ethers.getSigners())[0];
 
     log(
-      `deploy ${contract}, operator:${operator.address}, args:${JSON.stringify(
-        contractArgs
-      )}, config: ${JSON.stringify(txConfig)}`
+      `deploy ${contractName}, operator:${
+        operator.address
+      }, args:${JSON.stringify(contractArgs)}, config: ${JSON.stringify(
+        txConfig
+      )}`
     );
 
-    const Contract = await hre.ethers.getContractFactory(contract);
-    const transaction = await Contract.deploy(...contractArgs, txConfig);
-    const result = await transaction.wait();
-    const contractProxyAddress = result.contractAddress;
+    const Contract = await hre.ethers.getContractFactory(contractName);
+    const contract = await Contract.deploy(...contractArgs, txConfig);
+    const deployed = await contract.deployed();
+    const contractProxyAddress = contract.address;
     const contractImplAddress = contractProxyAddress;
-    const contractFromBlock = result.blockNumber;
+    const contractFromBlock = deployed.blockNumber;
     const contractVersion = '1.0.0';
     log(
-      `${contract} deployed proxy at ${contractProxyAddress},impl at ${contractImplAddress},version ${contractVersion},fromBlock ${contractFromBlock}`
+      `${contractName} deployed proxy at ${contractProxyAddress},impl at ${contractImplAddress},version ${contractVersion},fromBlock ${contractFromBlock}`
     );
 
     const deployment = await getDeployment(chainId);
-    deployment[contract] = {
+    deployment[contractName] = {
       proxyAddress: contractProxyAddress,
       implAddress: contractImplAddress,
       version: contractVersion,
-      contract: contract,
+      name: contractName,
       operator: operator.address,
       fromBlock: contractFromBlock,
     };
