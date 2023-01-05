@@ -9,7 +9,7 @@
   "scripts": {
     "i": "yarn && forge install && cd sdk && yarn",
     "build": "hardhat typechain && forge build",
-    "test": "forge test -vvvv",
+    "test": "forge test",
     "testh": "hardhat test",
     "testc": "hardhat coverage",
     "format": "yarn prettier --write \"**/*.{ts,js,sol}\" && cd sdk && yarn format"

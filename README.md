@@ -19,14 +19,14 @@ yarn build
 ### Test
 forge test
 ```bash
-yarn test
+yarn test -vvvv
 ```
 
 forge fork test
 ```bash
 source envs/eth.env
 
-yarn test --fork-url $PROVIDER
+yarn test -vvvv --fork-url $PROVIDER
 ```
 
 hardhat test
@@ -44,7 +44,7 @@ forge test
 ```bash
 source envs/eth.env
 
-yarn run env-cmd -f $ENV_FILE yarn run hardhat contract:deploy --contract SyncAmpl2 --max-priority-fee-per-gas 0.1 --args [] --network $NETWORK_ID
+yarn run env-cmd -f $ENV_FILE yarn run hardhat contract:deploy --name Token --max-priority-fee-per-gas 0.1 --args [] --network $NETWORK_ID
 ```
 
 ### Notes
