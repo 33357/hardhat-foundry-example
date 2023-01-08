@@ -42,7 +42,7 @@ task(`contract:deploy`, `Deploy contract`)
 
     const Contract = await hre.ethers.getContractFactory(contractName);
     const contract = await Contract.deploy(...contractArgs, txConfig);
-    const deployed = await contract.deployed();
+    const deployed = await contract.deployTransaction.wait();
     const contractProxyAddress = contract.address;
     const contractImplAddress = contractProxyAddress;
     const contractFromBlock = deployed.blockNumber;

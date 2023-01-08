@@ -38,7 +38,7 @@ task(`upgradeableContract:deploy`, `Deploy upgradeableContract`)
       {kind: 'uups'},
       txConfig
     );
-    const result = await transaction.wait();
+    const result = await transaction.deployTransaction.wait();
     const contractProxyAddress = result.contractAddress;
     const contractImplAddress = await getImplementationAddress(
       hre.ethers.provider,
