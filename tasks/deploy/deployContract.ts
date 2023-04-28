@@ -56,7 +56,6 @@ task(`contract:deploy`, `Deploy contract`)
       proxyAddress: contractProxyAddress,
       implAddress: contractImplAddress,
       version: contractVersion,
-      name: contractName,
       operator: operator.address,
       fromBlock: contractFromBlock,
     };

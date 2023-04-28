@@ -1,7 +1,7 @@
 import '@nomiclabs/hardhat-ethers';
 import {task} from 'hardhat/config';
 import {HardhatRuntimeEnvironment} from 'hardhat/types';
-import {log, getDeployment} from '../utils';
+import {getDeployment, log} from '../utils';
 
 task(`upgradeableContract:verify`, `verify upgradeableContract`)
   .addOptionalParam('name', 'The contract name')

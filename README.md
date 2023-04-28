@@ -39,12 +39,39 @@ hardhat coverage test
 yarn testc
 ```
 
-### Deploy
-forge test
+### Env
+
 ```bash
 source envs/eth.env
+source envs/bsc.env
+source envs/pol.env
 
-yarn run env-cmd -f $ENV_FILE yarn run hardhat contract:deploy --name Token --max-priority-fee-per-gas 0.1 --args [] --network $NETWORK_ID
+PRIVATE_KEY=
+SCAN_API_KEY=
+PROVIDER=
+NETWORK_ID=
+ENV_FILE=envs/eth.env
+```
+
+### Deploy
+
+```bash
+yarn run env-cmd -f $ENV_FILE yarn run hardhat contract:deploy --name Token --gas-price 3 --args '[]' --network $NETWORK_ID
+
+yarn run env-cmd -f $ENV_FILE yarn run hardhat upgradeableContract:deploy --name TokenUpgradeable --gas-price 3 --args '[]' --network $NETWORK_ID
+```
+
+### Upgrade
+
+```bash
+yarn run env-cmd -f $ENV_FILE yarn run hardhat upgradeableContract:upgrade --proxy-name TokenUpgradeable --impl-name TokenUpgradeable --gas-price 3 --network $NETWORK_ID
+```
+
+### Verfiy
+```bash
+yarn run env-cmd -f $ENV_FILE yarn run hardhat contract:verify --name Token --args '[]' --network $NETWORK_ID
+
+yarn run env-cmd -f $ENV_FILE yarn run hardhat upgradeableContract:verify --name TokenUpgradeable --args '[]' --network $NETWORK_ID
 ```
 
 ### Notes
