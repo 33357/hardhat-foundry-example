@@ -9,8 +9,8 @@ task(`contract:deploy`, `Deploy contract`)
   .addOptionalParam('args', 'The contract args')
   .addOptionalParam('gasPrice', 'The gasPrice to transaction')
   .addOptionalParam(
-    'maxPriorityFeePerGas',
-    'The maxPriorityFeePerGas to transaction'
+    'maxFeePerGas',
+    'The maxFeePerGas to transaction'
   )
   .setAction(async (args, hre: HardhatRuntimeEnvironment) => {
     const chainId = (await hre.ethers.provider.getNetwork()).chainId;
@@ -18,9 +18,9 @@ task(`contract:deploy`, `Deploy contract`)
     if (args['gasPrice']) {
       txConfig.gasPrice = hre.ethers.utils.parseUnits(args['gasPrice'], 'gwei');
     }
-    if (args['maxPriorityFeePerGas']) {
+    if (args['maxFeePerGas']) {
       txConfig.maxFeePerGas = hre.ethers.utils.parseUnits(
-        args['maxPriorityFeePerGas'],
+        args['maxFeePerGas'],
         'gwei'
       );
       txConfig.maxPriorityFeePerGas = hre.ethers.utils.parseUnits(
