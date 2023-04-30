@@ -7,7 +7,7 @@
   "scripts": {
     "prebuild": "cd .. && cp ./deployment/deployment.json ./sdk/src/config/ && cd sdk",
     "build:clean": "rm -rf dist && rm -f tsconfig.tsbuildinfo",
-    "build": "yarn build:clean && yarn prebuild && yarn tsc && yarn cpy ./src/typechain/ ./dist/typechain/",
+    "build": "yarn build:clean && yarn prebuild && yarn tsc",
     "format": "yarn prettier --write \"**/*.{ts,js}\""
   },
   "dependencies": {

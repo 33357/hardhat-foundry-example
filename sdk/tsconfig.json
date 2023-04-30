@@ -9,5 +9,5 @@
     "declaration": true,
     "resolveJsonModule": true
   },
-  "include": ["src/**/*.ts", "src/typechain/*d.ts"]
+  "include": ["src/**/*.ts"]
 }
