@@ -4,6 +4,7 @@ import '@typechain/hardhat';
 import 'hardhat-preprocessor';
 import '@nomiclabs/hardhat-etherscan';
 import '@openzeppelin/hardhat-upgrades';
+import 'hardhat-contract-sizer';
 import {HardhatUserConfig} from 'hardhat/config';
 import dotenv from 'dotenv';
 dotenv.config();
@@ -80,6 +81,11 @@ const config: HardhatUserConfig = {
         return line;
       },
     }),
+  },
+  contractSizer: {
+    alphaSort: true,
+    runOnCompile: true,
+    disambiguatePaths: false,
   },
   etherscan: {
     apiKey: process.env.SCAN_API_KEY,
