@@ -33,7 +33,7 @@
     "dotenv": "^16.0.3",
     "env-cmd": "^10.1.0",
     "ethereum-waffle": "^3.2.0",
-    "ethers": "^5.6.6",
+    "ethers": "^5.4.6",
     "hardhat": "^2.9.5",
     "hardhat-preprocessor": "^0.1.4",
     "prettier-plugin-solidity": "^1.1.1",
