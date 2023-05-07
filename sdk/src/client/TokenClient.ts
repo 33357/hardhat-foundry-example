@@ -66,6 +66,6 @@ export class TokenClient implements ITokenClient {
     const transaction = await this.contract.transfer(to, amount, {
       ...config
     });
-    this._afterTransaction(transaction, callback);
+    await this._afterTransaction(transaction, callback);
   }
 }
